@@ -158,7 +158,7 @@ local backroomCorner = Instance.new("UICorner")
 backroomCorner.CornerRadius = UDim.new(0, 8)
 backroomCorner.Parent = backroomTabBtn
 
--- [НОВОЕ] Поле поиска (Search Bar)
+-- Поле поиска (Search Bar) - Переведено на английский
 local searchBox = Instance.new("TextBox")
 searchBox.Name = "SearchBar"
 searchBox.Size = UDim2.new(1, -20, 0, 35)
@@ -166,7 +166,7 @@ searchBox.Position = UDim2.new(0, 10, 0, 105)
 searchBox.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
 searchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 searchBox.PlaceholderColor3 = Color3.fromRGB(100, 100, 120)
-searchBox.PlaceholderText = "🔍 Поиск хомяка..."
+searchBox.PlaceholderText = "🔍 Search Chomik..."
 searchBox.Text = ""
 searchBox.TextSize = 14
 searchBox.Font = Enum.Font.Gotham
@@ -178,7 +178,7 @@ local searchCorner = Instance.new("UICorner")
 searchCorner.CornerRadius = UDim.new(0, 6)
 searchCorner.Parent = searchBox
 
--- Content frame (размер изменен, чтобы освободить место под поиск)
+-- Content frame
 local contentFrame = Instance.new("Frame")
 contentFrame.Name = "ContentFrame"
 contentFrame.Size = UDim2.new(1, 0, 1, -150)
@@ -325,7 +325,7 @@ for _, location in ipairs(backroomLocations) do
     createTPButton(backroomContent, location.name, location.cframe)
 end
 
--- [НОВОЕ] Логика работы поиска
+-- Логика работы поиска
 searchBox:GetPropertyChangedSignal("Text"):Connect(function()
     local filterText = string.lower(searchBox.Text)
     
