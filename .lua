@@ -158,7 +158,7 @@ local backroomCorner = Instance.new("UICorner")
 backroomCorner.CornerRadius = UDim.new(0, 8)
 backroomCorner.Parent = backroomTabBtn
 
--- Поле поиска (Search Bar) - Переведено на английский
+-- Search Bar
 local searchBox = Instance.new("TextBox")
 searchBox.Name = "SearchBar"
 searchBox.Size = UDim2.new(1, -20, 0, 35)
@@ -290,20 +290,21 @@ local tpLocations = {
     {name = "Location 2", cframe = nil},
     {name = "Location 3", cframe = nil},
     {name = "Location 4", cframe = nil},
-    {name = "Location 5", cframe = nil},
+    {name = "chomikception", cframe = CFrame.new(592, 381.839478, 1205.0448, -1.00000024, 0, 0, 0, 0.999998033, 0.00198540557, 0, 0.00198540557, -0.999998331)},
     {name = "Location 6", cframe = nil},
     {name = "Location 7", cframe = nil},
     {name = "Location 8", cframe = nil},
-    {name = "Location 9", cframe = nil},
+    -- [UPDATED]: Location 9 replaced with Forgor Chomik
+    {name = "Forgor Chomik", cframe = CFrame.new(161.525467, 328.109314, 670.489563, -5.41210175e-05, -1.34855509e-05, -1, -0.469426453, 0.882971585, 1.34855509e-05, 0.882971644, 0.469426453, -5.41210175e-05)},
     {name = "Chomspirasits", cframe = CFrame.new(2806.34229, 384, 998.670349, -0.258864403, 0, -0.965913713, 0, 1, 0, 0.965913713, 0, -0.258864403)},
     {name = "Periodic Chomik (BUG)", cframe = CFrame.new(-320.919647, 241.961548, 196.081055, 0, 0, -1, 0, 1, 0, 1, 0, 0)},
     {name = "party Chomik", cframe = CFrame.new(58.974987, 273.500061, -213.500015, 0, 0, 1, 0, 1, 0, -1, 0, 0)},
     {name = "Rainbow Chomik", cframe = CFrame.new(-23.9996872, 278.000092, -150.974915, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "Reggimik", cframe = CFrame.new(331.500031, 250.000626, 460.499603, 1, 0, 0, 0, 0, 1, 0, -1, 0)},
     {name = "Location 15", cframe = nil},
-    {name = "Location 16", cframe = nil},
+    {name = "Gamik", cframe = CFrame.new(-3120.5, 256.000549, 1220.50024, -1.1920929e-07, -1.00000012, 0, 1.00000012, -1.1920929e-07, 0, 0, 0, 1)},
     {name = "Location 17", cframe = nil},
-    {name = "Location 18", cframe = nil},
+    {name = "Wannacry Chomik", cframe = CFrame.new(-237.044464, 280.525085, -242.393753, 0.866040111, -0.499974549, -5.5283308e-06, -5.5283308e-06, -2.06232071e-05, 0.99999994, -0.499974549, -0.866040051, -2.06232071e-05)},
     {name = "Location 19", cframe = nil},
     {name = "Location 20", cframe = nil},
 }
@@ -325,11 +326,11 @@ for _, location in ipairs(backroomLocations) do
     createTPButton(backroomContent, location.name, location.cframe)
 end
 
--- Логика работы поиска
+-- Search filtering logic
 searchBox:GetPropertyChangedSignal("Text"):Connect(function()
     local filterText = string.lower(searchBox.Text)
     
-    -- Фильтруем кнопки во вкладке TP
+    -- Filter buttons in TP tab
     for _, child in ipairs(tpContent:GetChildren()) do
         if child:IsA("TextButton") then
             if filterText == "" or string.find(string.lower(child.Text), filterText) then
@@ -340,7 +341,7 @@ searchBox:GetPropertyChangedSignal("Text"):Connect(function()
         end
     end
     
-    -- Фильтруем кнопки во вкладке Backroom
+    -- Filter buttons in Backroom tab
     for _, child in ipairs(backroomContent:GetChildren()) do
         if child:IsA("TextButton") then
             if filterText == "" or string.find(string.lower(child.Text), filterText) then
