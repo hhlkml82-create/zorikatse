@@ -372,10 +372,7 @@ avatarBtn.Position = UDim2.new(1, -avatarSize - 10, 1, -avatarSize - 10)
 avatarBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
 avatarBtn.BorderSizePixel = 2
 avatarBtn.BorderColor3 = Color3.fromRGB(200, 150, 0)
-
--- [ИЗМЕНЕНО]: Поставили новый ID ассета с надписью "menu" вместо старого Хомяка
 avatarBtn.Image = "rbxassetid://134707111242336"
-
 avatarBtn.ScaleType = Enum.ScaleType.Stretch
 avatarBtn.Visible = false
 avatarBtn.Parent = screenGui
@@ -420,33 +417,4 @@ end)
 closeBtn.TouchTap:Connect(function()
     mainFrame.Visible = false
     avatarBtn.Visible = true
-end)
-
--- Вторая панель
-local gui = Instance.new("ScreenGui")
-gui.Name = "(970) Find the Chomiks"
-gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
-
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 180, 0, 100)
-frame.Position = UDim2.new(0.5, -90, 0.5, -50)
-frame.Parent = gui
-
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(1, -20, 0, 40)
-button.Position = UDim2.new(0, 10, 0, 30)
-button.Text = "Телепорт"
-button.Parent = frame
-
-button.MouseButton1Click:Connect(function()
-    local character = player.Character or player.CharacterAdded:Wait()
-    local hrp = character:WaitForChild("HumanoidRootPart")
-
-    hrp.CFrame = CFrame.new(
-        -27.875, 3.27508545, -13219.5,
-        0, 0, 1,
-        0, 1, 0,
-        -1, 0, 0
-    )
 end)
