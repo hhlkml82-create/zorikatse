@@ -57,7 +57,6 @@ titleCorner.Parent = titleLabel
 -- Mouse dragging for PC
 titleLabel.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
-    
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = true
         dragStart = input.Position
@@ -86,7 +85,6 @@ end)
 -- Touch dragging for mobile
 titleLabel.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
-    
     if input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
@@ -160,11 +158,31 @@ local backroomCorner = Instance.new("UICorner")
 backroomCorner.CornerRadius = UDim.new(0, 8)
 backroomCorner.Parent = backroomTabBtn
 
--- Content frame
+-- [НОВОЕ] Поле поиска (Search Bar)
+local searchBox = Instance.new("TextBox")
+searchBox.Name = "SearchBar"
+searchBox.Size = UDim2.new(1, -20, 0, 35)
+searchBox.Position = UDim2.new(0, 10, 0, 105)
+searchBox.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
+searchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+searchBox.PlaceholderColor3 = Color3.fromRGB(100, 100, 120)
+searchBox.PlaceholderText = "🔍 Поиск хомяка..."
+searchBox.Text = ""
+searchBox.TextSize = 14
+searchBox.Font = Enum.Font.Gotham
+searchBox.BorderSizePixel = 0
+searchBox.ClearTextOnFocus = false
+searchBox.Parent = mainFrame
+
+local searchCorner = Instance.new("UICorner")
+searchCorner.CornerRadius = UDim.new(0, 6)
+searchCorner.Parent = searchBox
+
+-- Content frame (размер изменен, чтобы освободить место под поиск)
 local contentFrame = Instance.new("Frame")
 contentFrame.Name = "ContentFrame"
-contentFrame.Size = UDim2.new(1, 0, 1, -100)
-contentFrame.Position = UDim2.new(0, 0, 0, 100)
+contentFrame.Size = UDim2.new(1, 0, 1, -150)
+contentFrame.Position = UDim2.new(0, 0, 0, 150)
 contentFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
 contentFrame.BorderSizePixel = 0
 contentFrame.Parent = mainFrame
@@ -250,7 +268,6 @@ local function createTPButton(parent, name, cframe)
     btn.MouseButton1Click:Connect(function()
         local character = player.Character or player.CharacterAdded:Wait()
         local hrp = character:WaitForChild("HumanoidRootPart")
-        
         if cframe then
             hrp.CFrame = cframe
         end
@@ -259,7 +276,6 @@ local function createTPButton(parent, name, cframe)
     btn.TouchTap:Connect(function()
         local character = player.Character or player.CharacterAdded:Wait()
         local hrp = character:WaitForChild("HumanoidRootPart")
-        
         if cframe then
             hrp.CFrame = cframe
         end
@@ -283,7 +299,6 @@ local tpLocations = {
     {name = "Periodic Chomik (BUG)", cframe = CFrame.new(-320.919647, 241.961548, 196.081055, 0, 0, -1, 0, 1, 0, 1, 0, 0)},
     {name = "party Chomik", cframe = CFrame.new(58.974987, 273.500061, -213.500015, 0, 0, 1, 0, 1, 0, -1, 0, 0)},
     {name = "Rainbow Chomik", cframe = CFrame.new(-23.9996872, 278.000092, -150.974915, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
-    -- [ИЗМЕНЕНО]: Заменили Location 14 на Reggimik
     {name = "Reggimik", cframe = CFrame.new(331.500031, 250.000626, 460.499603, 1, 0, 0, 0, 0, 1, 0, -1, 0)},
     {name = "Location 15", cframe = nil},
     {name = "Location 16", cframe = nil},
@@ -310,6 +325,33 @@ for _, location in ipairs(backroomLocations) do
     createTPButton(backroomContent, location.name, location.cframe)
 end
 
+-- [НОВОЕ] Логика работы поиска
+searchBox:GetPropertyChangedSignal("Text"):Connect(function()
+    local filterText = string.lower(searchBox.Text)
+    
+    -- Фильтруем кнопки во вкладке TP
+    for _, child in ipairs(tpContent:GetChildren()) do
+        if child:IsA("TextButton") then
+            if filterText == "" or string.find(string.lower(child.Text), filterText) then
+                child.Visible = true
+            else
+                child.Visible = false
+            end
+        end
+    end
+    
+    -- Фильтруем кнопки во вкладке Backroom
+    for _, child in ipairs(backroomContent:GetChildren()) do
+        if child:IsA("TextButton") then
+            if filterText == "" or string.find(string.lower(child.Text), filterText) then
+                child.Visible = true
+            else
+                child.Visible = false
+            end
+        end
+    end
+end)
+
 -- Update canvas size
 tpLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     tpContent.CanvasSize = UDim2.new(0, 0, 0, tpLayout.AbsoluteContentSize.Y + 20)
@@ -323,10 +365,8 @@ end)
 tpTabBtn.MouseButton1Click:Connect(function()
     tpContent.Visible = true
     backroomContent.Visible = false
-    
     tpTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
     tpTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    
     backroomTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
     backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
 end)
@@ -334,10 +374,8 @@ end)
 tpTabBtn.TouchTap:Connect(function()
     tpContent.Visible = true
     backroomContent.Visible = false
-    
     tpTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
     tpTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    
     backroomTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
     backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
 end)
@@ -345,10 +383,8 @@ end)
 backroomTabBtn.MouseButton1Click:Connect(function()
     tpContent.Visible = false
     backroomContent.Visible = true
-    
     tpTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
     tpTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
-    
     backroomTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
     backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
@@ -356,10 +392,8 @@ end)
 backroomTabBtn.TouchTap:Connect(function()
     tpContent.Visible = false
     backroomContent.Visible = true
-    
     tpTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
     tpTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
-    
     backroomTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
     backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
