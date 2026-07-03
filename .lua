@@ -279,9 +279,9 @@ local tpLocations = {
     {name = "Location 7", cframe = nil},
     {name = "Location 8", cframe = nil},
     {name = "Location 9", cframe = nil},
-    -- [ИЗМЕНЕНО]: Заменили Location 10 на Chomspirasits с твоими координатами
     {name = "Chomspirasits", cframe = CFrame.new(2806.34229, 384, 998.670349, -0.258864403, 0, -0.965913713, 0, 1, 0, 0.965913713, 0, -0.258864403)},
-    {name = "Location 11", cframe = nil},
+    -- [ИЗМЕНЕНО]: Заменили Location 11 на Periodic Chomik (BUG)
+    {name = "Periodic Chomik (BUG)", cframe = CFrame.new(-320.919647, 241.961548, 196.081055, 0, 0, -1, 0, 1, 0, 1, 0, 0)},
     {name = "Location 12", cframe = nil},
     {name = "Location 13", cframe = nil},
     {name = "Location 14", cframe = nil},
