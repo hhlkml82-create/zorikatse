@@ -5,14 +5,14 @@ local UserInputService = game:GetService("UserInputService")
 -- Detect if on mobile
 local isMobile = game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.RightControl)
 
--- Get screen size
-local screenSize = screenGui and screenGui.AbsoluteSize or Vector2.new(1920, 1080)
-
 -- Create main ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "(970) Find the Chomiks"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
+
+-- Get screen size
+local screenSize = screenGui and screenGui.AbsoluteSize or Vector2.new(1920, 1080)
 
 -- Determine menu size based on device
 local menuWidth = isMobile and 300 or 350
@@ -363,7 +363,7 @@ backroomTabBtn.TouchTap:Connect(function()
     backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
 
--- Create minimize button (avatar) with game image
+-- Create minimize button (avatar) with menu image
 local avatarSize = isMobile and 70 or 60
 local avatarBtn = Instance.new("ImageButton")
 avatarBtn.Name = "AvatarBtn"
@@ -372,7 +372,10 @@ avatarBtn.Position = UDim2.new(1, -avatarSize - 10, 1, -avatarSize - 10)
 avatarBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
 avatarBtn.BorderSizePixel = 2
 avatarBtn.BorderColor3 = Color3.fromRGB(200, 150, 0)
-avatarBtn.Image = "rbxassetid://12870159481"
+
+-- [ИЗМЕНЕНО]: Поставили новый ID ассета с надписью "menu" вместо старого Хомяка
+avatarBtn.Image = "rbxassetid://134707111242336"
+
 avatarBtn.ScaleType = Enum.ScaleType.Stretch
 avatarBtn.Visible = false
 avatarBtn.Parent = screenGui
@@ -417,4 +420,33 @@ end)
 closeBtn.TouchTap:Connect(function()
     mainFrame.Visible = false
     avatarBtn.Visible = true
+end)
+
+-- Вторая панель
+local gui = Instance.new("ScreenGui")
+gui.Name = "(970) Find the Chomiks"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 180, 0, 100)
+frame.Position = UDim2.new(0.5, -90, 0.5, -50)
+frame.Parent = gui
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(1, -20, 0, 40)
+button.Position = UDim2.new(0, 10, 0, 30)
+button.Text = "Телепорт"
+button.Parent = frame
+
+button.MouseButton1Click:Connect(function()
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:WaitForChild("HumanoidRootPart")
+
+    hrp.CFrame = CFrame.new(
+        -27.875, 3.27508545, -13219.5,
+        0, 0, 1,
+        0, 1, 0,
+        -1, 0, 0
+    )
 end)
