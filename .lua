@@ -24,7 +24,6 @@ corner.Parent = mainFrame
 
 -- Dragging variables
 local dragging = false
-local dragInput
 local dragStart
 local startPos
 
@@ -45,7 +44,7 @@ local titleCorner = Instance.new("UICorner")
 titleCorner.CornerRadius = UDim.new(0, 12)
 titleCorner.Parent = titleLabel
 
--- Dragging functionality
+-- Mouse dragging for PC
 titleLabel.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
     
@@ -71,6 +70,35 @@ UserInputService.InputChanged:Connect(function(input, gameProcessed)
             startPos.Y.Scale,
             startPos.Y.Offset + delta.Y
         )
+    end
+end)
+
+-- Touch dragging for mobile
+titleLabel.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+    end
+end)
+
+titleLabel.InputChanged:Connect(function(input, gameProcessed)
+    if dragging and input.UserInputType == Enum.UserInputType.Touch then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(
+            startPos.X.Scale, 
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+titleLabel.InputEnded:Connect(function(input, gameProcessed)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        dragging = false
     end
 end)
 
@@ -218,6 +246,15 @@ local function createTPButton(parent, name, cframe)
         end
     end)
     
+    btn.TouchTap:Connect(function()
+        local character = player.Character or player.CharacterAdded:Wait()
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        
+        if cframe then
+            hrp.CFrame = cframe
+        end
+    end)
+    
     return btn
 end
 
@@ -283,7 +320,29 @@ tpTabBtn.MouseButton1Click:Connect(function()
     backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
 end)
 
+tpTabBtn.TouchTap:Connect(function()
+    tpContent.Visible = true
+    backroomContent.Visible = false
+    
+    tpTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
+    tpTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    
+    backroomTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+    backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+end)
+
 backroomTabBtn.MouseButton1Click:Connect(function()
+    tpContent.Visible = false
+    backroomContent.Visible = true
+    
+    tpTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+    tpTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+    
+    backroomTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
+    backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+end)
+
+backroomTabBtn.TouchTap:Connect(function()
     tpContent.Visible = false
     backroomContent.Visible = true
     
@@ -312,5 +371,9 @@ closeCorner.CornerRadius = UDim.new(0, 6)
 closeCorner.Parent = closeBtn
 
 closeBtn.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+closeBtn.TouchTap:Connect(function()
     screenGui:Destroy()
 end)
