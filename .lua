@@ -363,7 +363,7 @@ backroomTabBtn.TouchTap:Connect(function()
     backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
 
--- Create minimize button (avatar)
+-- Create minimize button (avatar) with game image
 local avatarSize = isMobile and 70 or 60
 local avatarBtn = Instance.new("ImageButton")
 avatarBtn.Name = "AvatarBtn"
@@ -372,23 +372,14 @@ avatarBtn.Position = UDim2.new(1, -avatarSize - 10, 1, -avatarSize - 10)
 avatarBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
 avatarBtn.BorderSizePixel = 2
 avatarBtn.BorderColor3 = Color3.fromRGB(200, 150, 0)
+avatarBtn.Image = "rbxassetid://12870159481"
+avatarBtn.ScaleType = Enum.ScaleType.Stretch
 avatarBtn.Visible = false
 avatarBtn.Parent = screenGui
 
 local avatarCorner = Instance.new("UICorner")
 avatarCorner.CornerRadius = UDim.new(0, 10)
 avatarCorner.Parent = avatarBtn
-
--- Add text to avatar button
-local avatarText = Instance.new("TextLabel")
-avatarText.Name = "AvatarText"
-avatarText.Size = UDim2.new(1, 0, 1, 0)
-avatarText.BackgroundTransparency = 1
-avatarText.TextColor3 = Color3.fromRGB(0, 0, 0)
-avatarText.TextSize = isMobile and 32 or 28
-avatarText.Font = Enum.Font.GothamBold
-avatarText.Text = "🐹"
-avatarText.Parent = avatarBtn
 
 -- Avatar button functionality
 avatarBtn.MouseButton1Click:Connect(function()
