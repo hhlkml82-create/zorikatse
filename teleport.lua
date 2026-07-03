@@ -1,7 +1,7 @@
 local player = game.Players.LocalPlayer
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "TeleportMenu"
+gui.Name = "(970) Find the Chomiks"
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
