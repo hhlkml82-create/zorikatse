@@ -353,6 +353,43 @@ backroomTabBtn.TouchTap:Connect(function()
     backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
 
+-- Create minimize button (avatar)
+local avatarBtn = Instance.new("ImageButton")
+avatarBtn.Name = "AvatarBtn"
+avatarBtn.Size = UDim2.new(0, 60, 0, 60)
+avatarBtn.Position = UDim2.new(1, -80, 1, -80)
+avatarBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
+avatarBtn.BorderSizePixel = 2
+avatarBtn.BorderColor3 = Color3.fromRGB(200, 150, 0)
+avatarBtn.Visible = false
+avatarBtn.Parent = screenGui
+
+local avatarCorner = Instance.new("UICorner")
+avatarCorner.CornerRadius = UDim.new(0, 10)
+avatarCorner.Parent = avatarBtn
+
+-- Add text to avatar button
+local avatarText = Instance.new("TextLabel")
+avatarText.Name = "AvatarText"
+avatarText.Size = UDim2.new(1, 0, 1, 0)
+avatarText.BackgroundTransparency = 1
+avatarText.TextColor3 = Color3.fromRGB(0, 0, 0)
+avatarText.TextSize = 28
+avatarText.Font = Enum.Font.GothamBold
+avatarText.Text = "🐹"
+avatarText.Parent = avatarBtn
+
+-- Avatar button functionality
+avatarBtn.MouseButton1Click:Connect(function()
+    mainFrame.Visible = true
+    avatarBtn.Visible = false
+end)
+
+avatarBtn.TouchTap:Connect(function()
+    mainFrame.Visible = true
+    avatarBtn.Visible = false
+end)
+
 -- Close button
 local closeBtn = Instance.new("TextButton")
 closeBtn.Name = "CloseBtn"
@@ -371,9 +408,11 @@ closeCorner.CornerRadius = UDim.new(0, 6)
 closeCorner.Parent = closeBtn
 
 closeBtn.MouseButton1Click:Connect(function()
-    screenGui:Destroy()
+    mainFrame.Visible = false
+    avatarBtn.Visible = true
 end)
 
 closeBtn.TouchTap:Connect(function()
-    screenGui:Destroy()
+    mainFrame.Visible = false
+    avatarBtn.Visible = true
 end)
