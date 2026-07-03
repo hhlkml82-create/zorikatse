@@ -1,29 +1,280 @@
 local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "(970) Find the Chomiks"
-gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
+-- Create main ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "(970) Find the Chomiks"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
 
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 180, 0, 100)
-frame.Position = UDim2.new(0.5, -90, 0.5, -50)
-frame.Parent = gui
+-- Main frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainMenu"
+mainFrame.Size = UDim2.new(0, 350, 0, 500)
+mainFrame.Position = UDim2.new(0.5, -175, 0.5, -250)
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
 
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(1, -20, 0, 40)
-button.Position = UDim2.new(0, 10, 0, 30)
-button.Text = "Телепорт"
-button.Parent = frame
+-- Add corner radius
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = mainFrame
 
-button.MouseButton1Click:Connect(function()
-    local character = player.Character or player.CharacterAdded:Wait()
-    local hrp = character:WaitForChild("HumanoidRootPart")
+-- Title
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "Title"
+titleLabel.Size = UDim2.new(1, 0, 0, 50)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 50)
+titleLabel.TextColor3 = Color3.fromRGB(100, 200, 255)
+titleLabel.TextSize = 24
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Text = "(970) Find the Chomiks"
+titleLabel.BorderSizePixel = 0
+titleLabel.Parent = mainFrame
 
-    hrp.CFrame = CFrame.new(
-        -27.875, 3.27508545, -13219.5,
-        0, 0, 1,
-        0, 1, 0,
-        -1, 0, 0
-    )
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.Parent = titleLabel
+
+-- Tab buttons frame
+local tabFrame = Instance.new("Frame")
+tabFrame.Name = "TabFrame"
+tabFrame.Size = UDim2.new(1, 0, 0, 50)
+tabFrame.Position = UDim2.new(0, 0, 0, 50)
+tabFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 40)
+tabFrame.BorderSizePixel = 0
+tabFrame.Parent = mainFrame
+
+local tabLayout = Instance.new("UIListLayout")
+tabLayout.FillDirection = Enum.FillDirection.Horizontal
+tabLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+tabLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+tabLayout.Padding = UDim.new(0, 10)
+tabLayout.Parent = tabFrame
+
+-- TP Tab Button
+local tpTabBtn = Instance.new("TextButton")
+tpTabBtn.Name = "TPTab"
+tpTabBtn.Size = UDim2.new(0, 140, 0, 40)
+tpTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
+tpTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpTabBtn.TextSize = 16
+tpTabBtn.Font = Enum.Font.GothamBold
+tpTabBtn.Text = "TP"
+tpTabBtn.BorderSizePixel = 0
+tpTabBtn.Parent = tabFrame
+
+local tpCorner = Instance.new("UICorner")
+tpCorner.CornerRadius = UDim.new(0, 8)
+tpCorner.Parent = tpTabBtn
+
+-- Backroom Tab Button
+local backroomTabBtn = Instance.new("TextButton")
+backroomTabBtn.Name = "BackroomTab"
+backroomTabBtn.Size = UDim2.new(0, 140, 0, 40)
+backroomTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+backroomTabBtn.TextSize = 16
+backroomTabBtn.Font = Enum.Font.GothamBold
+backroomTabBtn.Text = "Backroom"
+backroomTabBtn.BorderSizePixel = 0
+backroomTabBtn.Parent = tabFrame
+
+local backroomCorner = Instance.new("UICorner")
+backroomCorner.CornerRadius = UDim.new(0, 8)
+backroomCorner.Parent = backroomTabBtn
+
+-- Content frame
+local contentFrame = Instance.new("Frame")
+contentFrame.Name = "ContentFrame"
+contentFrame.Size = UDim2.new(1, 0, 1, -100)
+contentFrame.Position = UDim2.new(0, 0, 0, 100)
+contentFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+contentFrame.BorderSizePixel = 0
+contentFrame.Parent = mainFrame
+
+-- TP Tab Content (ScrollingFrame)
+local tpContent = Instance.new("ScrollingFrame")
+tpContent.Name = "TPContent"
+tpContent.Size = UDim2.new(1, 0, 1, 0)
+tpContent.Position = UDim2.new(0, 0, 0, 0)
+tpContent.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+tpContent.BorderSizePixel = 0
+tpContent.ScrollBarThickness = 8
+tpContent.ScrollBarImageColor3 = Color3.fromRGB(100, 200, 255)
+tpContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+tpContent.Parent = contentFrame
+
+local tpLayout = Instance.new("UIListLayout")
+tpLayout.FillDirection = Enum.FillDirection.Vertical
+tpLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+tpLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+tpLayout.Padding = UDim.new(0, 8)
+tpLayout.Parent = tpContent
+
+local tpPadding = Instance.new("UIPadding")
+tpPadding.PaddingLeft = UDim.new(0, 10)
+tpPadding.PaddingRight = UDim.new(0, 10)
+tpPadding.PaddingTop = UDim.new(0, 10)
+tpPadding.PaddingBottom = UDim.new(0, 10)
+tpPadding.Parent = tpContent
+
+-- Backroom Tab Content (ScrollingFrame)
+local backroomContent = Instance.new("ScrollingFrame")
+backroomContent.Name = "BackroomContent"
+backroomContent.Size = UDim2.new(1, 0, 1, 0)
+backroomContent.Position = UDim2.new(0, 0, 0, 0)
+backroomContent.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+backroomContent.BorderSizePixel = 0
+backroomContent.ScrollBarThickness = 8
+backroomContent.ScrollBarImageColor3 = Color3.fromRGB(100, 200, 255)
+backroomContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+backroomContent.Visible = false
+backroomContent.Parent = contentFrame
+
+local backroomLayout = Instance.new("UIListLayout")
+backroomLayout.FillDirection = Enum.FillDirection.Vertical
+backroomLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+backroomLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+backroomLayout.Padding = UDim.new(0, 8)
+backroomLayout.Parent = backroomContent
+
+local backroomPadding = Instance.new("UIPadding")
+backroomPadding.PaddingLeft = UDim.new(0, 10)
+backroomPadding.PaddingRight = UDim.new(0, 10)
+backroomPadding.PaddingTop = UDim.new(0, 10)
+backroomPadding.PaddingBottom = UDim.new(0, 10)
+backroomPadding.Parent = backroomContent
+
+-- Function to create TP button
+local function createTPButton(parent, name, cframe)
+    local btn = Instance.new("TextButton")
+    btn.Name = name
+    btn.Size = UDim2.new(1, -10, 0, 40)
+    btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextSize = 14
+    btn.Font = Enum.Font.Gotham
+    btn.Text = name
+    btn.BorderSizePixel = 0
+    btn.Parent = parent
+    
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 6)
+    btnCorner.Parent = btn
+    
+    btn.MouseEnter:Connect(function()
+        btn.BackgroundColor3 = Color3.fromRGB(100, 150, 200)
+    end)
+    
+    btn.MouseLeave:Connect(function()
+        btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
+    end)
+    
+    btn.MouseButton1Click:Connect(function()
+        local character = player.Character or player.CharacterAdded:Wait()
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        
+        if cframe then
+            hrp.CFrame = cframe
+        end
+    end)
+    
+    return btn
+end
+
+-- Create 20+ TP buttons with placeholder coordinates
+local tpLocations = {
+    {name = "Location 1", cframe = nil},
+    {name = "Location 2", cframe = nil},
+    {name = "Location 3", cframe = nil},
+    {name = "Location 4", cframe = nil},
+    {name = "Location 5", cframe = nil},
+    {name = "Location 6", cframe = nil},
+    {name = "Location 7", cframe = nil},
+    {name = "Location 8", cframe = nil},
+    {name = "Location 9", cframe = nil},
+    {name = "Location 10", cframe = nil},
+    {name = "Location 11", cframe = nil},
+    {name = "Location 12", cframe = nil},
+    {name = "Location 13", cframe = nil},
+    {name = "Location 14", cframe = nil},
+    {name = "Location 15", cframe = nil},
+    {name = "Location 16", cframe = nil},
+    {name = "Location 17", cframe = nil},
+    {name = "Location 18", cframe = nil},
+    {name = "Location 19", cframe = nil},
+    {name = "Location 20", cframe = nil},
+}
+
+for _, location in ipairs(tpLocations) do
+    createTPButton(tpContent, location.name, location.cframe)
+end
+
+-- Create Backroom buttons
+local backroomLocations = {
+    {name = "Backroom Entrance", cframe = nil},
+    {name = "Backroom Level 1", cframe = nil},
+    {name = "Backroom Level 2", cframe = nil},
+    {name = "Backroom Level 3", cframe = nil},
+    {name = "Backroom Safe Zone", cframe = nil},
+}
+
+for _, location in ipairs(backroomLocations) do
+    createTPButton(backroomContent, location.name, location.cframe)
+end
+
+-- Update canvas size
+tpLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    tpContent.CanvasSize = UDim2.new(0, 0, 0, tpLayout.AbsoluteContentSize.Y + 20)
+end)
+
+backroomLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    backroomContent.CanvasSize = UDim2.new(0, 0, 0, backroomLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- Tab switching
+tpTabBtn.MouseButton1Click:Connect(function()
+    tpContent.Visible = true
+    backroomContent.Visible = false
+    
+    tpTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
+    tpTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    
+    backroomTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+    backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+end)
+
+backroomTabBtn.MouseButton1Click:Connect(function()
+    tpContent.Visible = false
+    backroomContent.Visible = true
+    
+    tpTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+    tpTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+    
+    backroomTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
+    backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+end)
+
+-- Close button
+local closeBtn = Instance.new("TextButton")
+closeBtn.Name = "CloseBtn"
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -40, 0, 10)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.TextSize = 16
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.Text = "X"
+closeBtn.BorderSizePixel = 0
+closeBtn.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 6)
+closeCorner.Parent = closeBtn
+
+closeBtn.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
 end)
