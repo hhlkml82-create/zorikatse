@@ -287,14 +287,13 @@ end
 -- Create TP buttons with coordinates
 local tpLocations = {
     {name = "16-Bit Chomik + Noob Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
-    {name = "Location 2", cframe = nil},
+    {name = "well Chomik", cframe = CFrame.new(-564.100769, 239.095383, 246.1203, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "Location 3", cframe = nil},
     {name = "Location 4", cframe = nil},
     {name = "chomikception", cframe = CFrame.new(592, 381.839478, 1205.0448, -1.00000024, 0, 0, 0, 0.999998033, 0.00198540557, 0, 0.00198540557, -0.999998331)},
     {name = "Location 6", cframe = nil},
-    {name = "Location 7", cframe = nil},
-    {name = "Location 8", cframe = nil},
-    -- [UPDATED]: Location 9 replaced with Forgor Chomik
+    {name = "skelechomik", cframe = CFrame.new(-648.795227, 243.420364, 189.000427, 7.27176666e-06, -0.951963842, 0.306210577, 1, 7.27176666e-06, -1.14738941e-06, -1.14738941e-06, 0.306210577, 0.951963782)},
+    {name = "cookiezik", cframe = CFrame.new(58.4750023, 1.52587891e-05, -299.000061, 0, 1, 0, 0, 0, -1, -1, 0, 0)},
     {name = "Forgor Chomik", cframe = CFrame.new(161.525467, 328.109314, 670.489563, -5.41210175e-05, -1.34855509e-05, -1, -0.469426453, 0.882971585, 1.34855509e-05, 0.882971644, 0.469426453, -5.41210175e-05)},
     {name = "Chomspirasits", cframe = CFrame.new(2806.34229, 384, 998.670349, -0.258864403, 0, -0.965913713, 0, 1, 0, 0.965913713, 0, -0.258864403)},
     {name = "Periodic Chomik (BUG)", cframe = CFrame.new(-320.919647, 241.961548, 196.081055, 0, 0, -1, 0, 1, 0, 1, 0, 0)},
@@ -305,8 +304,9 @@ local tpLocations = {
     {name = "Gamik", cframe = CFrame.new(-3120.5, 256.000549, 1220.50024, -1.1920929e-07, -1.00000012, 0, 1.00000012, -1.1920929e-07, 0, 0, 0, 1)},
     {name = "Location 17", cframe = nil},
     {name = "Wannacry Chomik", cframe = CFrame.new(-237.044464, 280.525085, -242.393753, 0.866040111, -0.499974549, -5.5283308e-06, -5.5283308e-06, -2.06232071e-05, 0.99999994, -0.499974549, -0.866040051, -2.06232071e-05)},
-    {name = "Location 19", cframe = nil},
-    {name = "Location 20", cframe = nil},
+    -- [UPDATED]: Location 19 replaced with Cataclysmik
+    {name = "Cataclysmik", cframe = CFrame.new(415.433746, 216.02507, 206.014008, 0.130536318, -0.991443515, 3.59416008e-05, -3.59416008e-05, -4.10079956e-05, -1, 0.991443515, 0.130536318, -4.10079956e-05)},
+    {name = "Desmos Chomik", cframe = CFrame.new(-371.944611, 238.461594, 137.605743, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
 }
 
 for _, location in ipairs(tpLocations) do
