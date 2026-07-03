@@ -2,17 +2,27 @@ local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 local UserInputService = game:GetService("UserInputService")
 
+-- Detect if on mobile
+local isMobile = game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.RightControl)
+
+-- Get screen size
+local screenSize = screenGui and screenGui.AbsoluteSize or Vector2.new(1920, 1080)
+
 -- Create main ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "(970) Find the Chomiks"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
+-- Determine menu size based on device
+local menuWidth = isMobile and 300 or 350
+local menuHeight = isMobile and 550 or 500
+
 -- Main frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainMenu"
-mainFrame.Size = UDim2.new(0, 350, 0, 500)
-mainFrame.Position = UDim2.new(0.5, -175, 0.5, -250)
+mainFrame.Size = UDim2.new(0, menuWidth, 0, menuHeight)
+mainFrame.Position = UDim2.new(0.5, -menuWidth/2, 0.5, -menuHeight/2)
 mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
 mainFrame.BorderSizePixel = 0
 mainFrame.Parent = screenGui
@@ -34,7 +44,7 @@ titleLabel.Size = UDim2.new(1, 0, 0, 50)
 titleLabel.Position = UDim2.new(0, 0, 0, 0)
 titleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 50)
 titleLabel.TextColor3 = Color3.fromRGB(100, 200, 255)
-titleLabel.TextSize = 24
+titleLabel.TextSize = isMobile and 18 or 24
 titleLabel.Font = Enum.Font.GothamBold
 titleLabel.Text = "(970) Find the Chomiks"
 titleLabel.BorderSizePixel = 0
@@ -115,16 +125,16 @@ local tabLayout = Instance.new("UIListLayout")
 tabLayout.FillDirection = Enum.FillDirection.Horizontal
 tabLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 tabLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-tabLayout.Padding = UDim.new(0, 10)
+tabLayout.Padding = UDim.new(0, isMobile and 5 or 10)
 tabLayout.Parent = tabFrame
 
 -- TP Tab Button
 local tpTabBtn = Instance.new("TextButton")
 tpTabBtn.Name = "TPTab"
-tpTabBtn.Size = UDim2.new(0, 140, 0, 40)
+tpTabBtn.Size = UDim2.new(0, isMobile and 120 or 140, 0, 40)
 tpTabBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
 tpTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-tpTabBtn.TextSize = 16
+tpTabBtn.TextSize = isMobile and 14 or 16
 tpTabBtn.Font = Enum.Font.GothamBold
 tpTabBtn.Text = "TP"
 tpTabBtn.BorderSizePixel = 0
@@ -137,10 +147,10 @@ tpCorner.Parent = tpTabBtn
 -- Backroom Tab Button
 local backroomTabBtn = Instance.new("TextButton")
 backroomTabBtn.Name = "BackroomTab"
-backroomTabBtn.Size = UDim2.new(0, 140, 0, 40)
+backroomTabBtn.Size = UDim2.new(0, isMobile and 120 or 140, 0, 40)
 backroomTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
 backroomTabBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
-backroomTabBtn.TextSize = 16
+backroomTabBtn.TextSize = isMobile and 14 or 16
 backroomTabBtn.Font = Enum.Font.GothamBold
 backroomTabBtn.Text = "Backroom"
 backroomTabBtn.BorderSizePixel = 0
@@ -166,7 +176,7 @@ tpContent.Size = UDim2.new(1, 0, 1, 0)
 tpContent.Position = UDim2.new(0, 0, 0, 0)
 tpContent.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
 tpContent.BorderSizePixel = 0
-tpContent.ScrollBarThickness = 8
+tpContent.ScrollBarThickness = isMobile and 10 or 8
 tpContent.ScrollBarImageColor3 = Color3.fromRGB(100, 200, 255)
 tpContent.CanvasSize = UDim2.new(0, 0, 0, 0)
 tpContent.Parent = contentFrame
@@ -192,7 +202,7 @@ backroomContent.Size = UDim2.new(1, 0, 1, 0)
 backroomContent.Position = UDim2.new(0, 0, 0, 0)
 backroomContent.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
 backroomContent.BorderSizePixel = 0
-backroomContent.ScrollBarThickness = 8
+backroomContent.ScrollBarThickness = isMobile and 10 or 8
 backroomContent.ScrollBarImageColor3 = Color3.fromRGB(100, 200, 255)
 backroomContent.CanvasSize = UDim2.new(0, 0, 0, 0)
 backroomContent.Visible = false
@@ -216,10 +226,10 @@ backroomPadding.Parent = backroomContent
 local function createTPButton(parent, name, cframe)
     local btn = Instance.new("TextButton")
     btn.Name = name
-    btn.Size = UDim2.new(1, -10, 0, 40)
+    btn.Size = UDim2.new(1, -10, 0, isMobile and 50 or 40)
     btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
     btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.TextSize = 14
+    btn.TextSize = isMobile and 16 or 14
     btn.Font = Enum.Font.Gotham
     btn.Text = name
     btn.BorderSizePixel = 0
@@ -354,10 +364,11 @@ backroomTabBtn.TouchTap:Connect(function()
 end)
 
 -- Create minimize button (avatar)
+local avatarSize = isMobile and 70 or 60
 local avatarBtn = Instance.new("ImageButton")
 avatarBtn.Name = "AvatarBtn"
-avatarBtn.Size = UDim2.new(0, 60, 0, 60)
-avatarBtn.Position = UDim2.new(1, -80, 1, -80)
+avatarBtn.Size = UDim2.new(0, avatarSize, 0, avatarSize)
+avatarBtn.Position = UDim2.new(1, -avatarSize - 10, 1, -avatarSize - 10)
 avatarBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
 avatarBtn.BorderSizePixel = 2
 avatarBtn.BorderColor3 = Color3.fromRGB(200, 150, 0)
@@ -374,7 +385,7 @@ avatarText.Name = "AvatarText"
 avatarText.Size = UDim2.new(1, 0, 1, 0)
 avatarText.BackgroundTransparency = 1
 avatarText.TextColor3 = Color3.fromRGB(0, 0, 0)
-avatarText.TextSize = 28
+avatarText.TextSize = isMobile and 32 or 28
 avatarText.Font = Enum.Font.GothamBold
 avatarText.Text = "🐹"
 avatarText.Parent = avatarBtn
@@ -393,11 +404,11 @@ end)
 -- Close button
 local closeBtn = Instance.new("TextButton")
 closeBtn.Name = "CloseBtn"
-closeBtn.Size = UDim2.new(0, 30, 0, 30)
-closeBtn.Position = UDim2.new(1, -40, 0, 10)
+closeBtn.Size = UDim2.new(0, isMobile and 40 or 30, 0, isMobile and 40 or 30)
+closeBtn.Position = UDim2.new(1, isMobile and -50 or -40, 0, 10)
 closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
 closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeBtn.TextSize = 16
+closeBtn.TextSize = isMobile and 20 or 16
 closeBtn.Font = Enum.Font.GothamBold
 closeBtn.Text = "X"
 closeBtn.BorderSizePixel = 0
