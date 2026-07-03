@@ -281,9 +281,10 @@ local tpLocations = {
     {name = "Location 9", cframe = nil},
     {name = "Chomspirasits", cframe = CFrame.new(2806.34229, 384, 998.670349, -0.258864403, 0, -0.965913713, 0, 1, 0, 0.965913713, 0, -0.258864403)},
     {name = "Periodic Chomik (BUG)", cframe = CFrame.new(-320.919647, 241.961548, 196.081055, 0, 0, -1, 0, 1, 0, 1, 0, 0)},
-    {name = "Location 12", cframe = nil},
-    {name = "Location 13", cframe = nil},
-    {name = "Location 14", cframe = nil},
+    {name = "party Chomik", cframe = CFrame.new(58.974987, 273.500061, -213.500015, 0, 0, 1, 0, 1, 0, -1, 0, 0)},
+    {name = "Rainbow Chomik", cframe = CFrame.new(-23.9996872, 278.000092, -150.974915, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
+    -- [ИЗМЕНЕНО]: Заменили Location 14 на Reggimik
+    {name = "Reggimik", cframe = CFrame.new(331.500031, 250.000626, 460.499603, 1, 0, 0, 0, 0, 1, 0, -1, 0)},
     {name = "Location 15", cframe = nil},
     {name = "Location 16", cframe = nil},
     {name = "Location 17", cframe = nil},
@@ -297,7 +298,6 @@ for _, location in ipairs(tpLocations) do
 end
 
 -- Create Backroom buttons
--- [ИЗМЕНЕНО]: Заменили названия кнопок с nil координатами на чистое "SOON"
 local backroomLocations = {
     {name = "Backrooms (teleport)", cframe = CFrame.new(-489.499908, 256.500061, -3356.53491, 1, 0, 0, 0, 1, 0, 0, 0, 1)},
     {name = "SOON", cframe = nil},
