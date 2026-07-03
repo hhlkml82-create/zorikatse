@@ -258,9 +258,9 @@ local function createTPButton(parent, name, cframe)
     return btn
 end
 
--- Create 20+ TP buttons with placeholder coordinates
+-- Create TP buttons with coordinates
 local tpLocations = {
-    {name = "Location 1", cframe = nil},
+    {name = "16-Bit Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "Location 2", cframe = nil},
     {name = "Location 3", cframe = nil},
     {name = "Location 4", cframe = nil},
