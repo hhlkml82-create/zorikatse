@@ -245,10 +245,19 @@ local function createTPButton(parent, name, cframe)
     local btn = Instance.new("TextButton")
     btn.Name = name
     btn.Size = UDim2.new(1, -10, 0, isMobile and 50 or 40)
-    btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
+    
+    -- Make the info button styled slightly differently (darker background) if cframe is nil
+    if cframe == nil and string.find(name, "released") then
+        btn.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+        btn.TextSize = isMobile and 12 or 11
+        btn.Font = Enum.Font.GothamBold
+    else
+        btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
+        btn.TextSize = isMobile and 16 or 14
+        btn.Font = Enum.Font.Gotham
+    end
+    
     btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.TextSize = isMobile and 16 or 14
-    btn.Font = Enum.Font.Gotham
     btn.Text = name
     btn.BorderSizePixel = 0
     btn.Parent = parent
@@ -257,35 +266,36 @@ local function createTPButton(parent, name, cframe)
     btnCorner.CornerRadius = UDim.new(0, 6)
     btnCorner.Parent = btn
     
-    btn.MouseEnter:Connect(function()
-        btn.BackgroundColor3 = Color3.fromRGB(100, 150, 200)
-    end)
-    
-    btn.MouseLeave:Connect(function()
-        btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
-    end)
-    
-    btn.MouseButton1Click:Connect(function()
-        local character = player.Character or player.CharacterAdded:Wait()
-        local hrp = character:WaitForChild("HumanoidRootPart")
-        if cframe then
+    -- Hover effects only for working teleport buttons
+    if cframe ~= nil then
+        btn.MouseEnter:Connect(function()
+            btn.BackgroundColor3 = Color3.fromRGB(100, 150, 200)
+        end)
+        
+        btn.MouseLeave:Connect(function()
+            btn.BackgroundColor3 = Color3.fromRGB(50, 100, 150)
+        end)
+        
+        btn.MouseButton1Click:Connect(function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local hrp = character:WaitForChild("HumanoidRootPart")
             hrp.CFrame = cframe
-        end
-    end)
-    
-    btn.TouchTap:Connect(function()
-        local character = player.Character or player.CharacterAdded:Wait()
-        local hrp = character:WaitForChild("HumanoidRootPart")
-        if cframe then
+        end)
+        
+        btn.TouchTap:Connect(function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local hrp = character:WaitForChild("HumanoidRootPart")
             hrp.CFrame = cframe
-        end
-    end)
+        end)
+    end
     
     return btn
 end
 
 -- Create TP buttons with coordinates
 local tpLocations = {
+    -- [NEW]: Added the text announcement as the 1st item
+    {name = "Script updates will be released every 25 downloads", cframe = nil},
     {name = "16-Bit Chomik + Noob Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "well Chomik", cframe = CFrame.new(-564.100769, 239.095383, 246.1203, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "chomatoes", cframe = CFrame.new(300.5, 242.974991, 493.499756, 1, 0, 0, 0, -1.1920929e-07, -1.00000012, 0, 1.00000012, -1.1920929e-07)},
@@ -312,7 +322,6 @@ end
 -- Create Backroom buttons
 local backroomLocations = {
     {name = "Backrooms (teleport)", cframe = CFrame.new(-489.499908, 256.500061, -3356.53491, 1, 0, 0, 0, 1, 0, 0, 0, 1)},
-    -- [UPDATED]: Changed to Survivor Chomik (NEW)
     {name = "Survivor Chomik (NEW)", cframe = CFrame.new(-228.820618, 378.57196, -767.333496, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "SOON", cframe = nil},
     {name = "SOON", cframe = nil},
