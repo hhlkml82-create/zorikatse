@@ -246,7 +246,7 @@ local function createTPButton(parent, name, cframe)
     btn.Name = name
     btn.Size = UDim2.new(1, -10, 0, isMobile and 50 or 40)
     
-    -- Make the info button styled slightly differently (darker background) if cframe is nil
+    -- Стиль плашки-объявления (без координат)
     if cframe == nil and string.find(name, "released") then
         btn.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
         btn.TextSize = isMobile and 12 or 11
@@ -266,7 +266,7 @@ local function createTPButton(parent, name, cframe)
     btnCorner.CornerRadius = UDim.new(0, 6)
     btnCorner.Parent = btn
     
-    -- Hover effects only for working teleport buttons
+    -- Клик работает только для телепортов
     if cframe ~= nil then
         btn.MouseEnter:Connect(function()
             btn.BackgroundColor3 = Color3.fromRGB(100, 150, 200)
@@ -292,9 +292,9 @@ local function createTPButton(parent, name, cframe)
     return btn
 end
 
--- Create TP buttons with coordinates
+-- Список локаций TP
 local tpLocations = {
-    -- [NEW]: Added the text announcement as the 1st item
+    -- Стоит самым первым в списке на самом верху
     {name = "Script updates will be released every 25 downloads", cframe = nil},
     {name = "16-Bit Chomik + Noob Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "well Chomik", cframe = CFrame.new(-564.100769, 239.095383, 246.1203, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
@@ -319,7 +319,7 @@ for _, location in ipairs(tpLocations) do
     createTPButton(tpContent, location.name, location.cframe)
 end
 
--- Create Backroom buttons
+-- Список локаций Backroom
 local backroomLocations = {
     {name = "Backrooms (teleport)", cframe = CFrame.new(-489.499908, 256.500061, -3356.53491, 1, 0, 0, 0, 1, 0, 0, 0, 1)},
     {name = "Survivor Chomik (NEW)", cframe = CFrame.new(-228.820618, 378.57196, -767.333496, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
@@ -332,11 +332,10 @@ for _, location in ipairs(backroomLocations) do
     createTPButton(backroomContent, location.name, location.cframe)
 end
 
--- Search filtering logic
+-- Поиск
 searchBox:GetPropertyChangedSignal("Text"):Connect(function()
     local filterText = string.lower(searchBox.Text)
     
-    -- Filter buttons in TP tab
     for _, child in ipairs(tpContent:GetChildren()) do
         if child:IsA("TextButton") then
             if filterText == "" or string.find(string.lower(child.Text), filterText) then
@@ -347,7 +346,6 @@ searchBox:GetPropertyChangedSignal("Text"):Connect(function()
         end
     end
     
-    -- Filter buttons in Backroom tab
     for _, child in ipairs(backroomContent:GetChildren()) do
         if child:IsA("TextButton") then
             if filterText == "" or string.find(string.lower(child.Text), filterText) then
@@ -359,7 +357,7 @@ searchBox:GetPropertyChangedSignal("Text"):Connect(function()
     end
 end)
 
--- Update canvas size
+-- Обновление скролла
 tpLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     tpContent.CanvasSize = UDim2.new(0, 0, 0, tpLayout.AbsoluteContentSize.Y + 20)
 end)
@@ -368,7 +366,7 @@ backroomLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function(
     backroomContent.CanvasSize = UDim2.new(0, 0, 0, backroomLayout.AbsoluteContentSize.Y + 20)
 end)
 
--- Tab switching
+-- Переключение вкладок
 tpTabBtn.MouseButton1Click:Connect(function()
     tpContent.Visible = true
     backroomContent.Visible = false
@@ -405,7 +403,7 @@ backroomTabBtn.TouchTap:Connect(function()
     backroomTabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
 
--- Create minimize button (avatar) with menu image
+-- Иконка сворачивания
 local avatarSize = isMobile and 70 or 60
 local avatarBtn = Instance.new("ImageButton")
 avatarBtn.Name = "AvatarBtn"
@@ -423,7 +421,6 @@ local avatarCorner = Instance.new("UICorner")
 avatarCorner.CornerRadius = UDim.new(0, 10)
 avatarCorner.Parent = avatarBtn
 
--- Avatar button functionality
 avatarBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = true
     avatarBtn.Visible = false
@@ -434,7 +431,7 @@ avatarBtn.TouchTap:Connect(function()
     avatarBtn.Visible = false
 end)
 
--- Close button
+-- Кнопка закрытия X
 local closeBtn = Instance.new("TextButton")
 closeBtn.Name = "CloseBtn"
 closeBtn.Size = UDim2.new(0, isMobile and 40 or 30, 0, isMobile and 40 or 30)
