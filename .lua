@@ -312,7 +312,8 @@ end
 -- Create Backroom buttons
 local backroomLocations = {
     {name = "Backrooms (teleport)", cframe = CFrame.new(-489.499908, 256.500061, -3356.53491, 1, 0, 0, 0, 1, 0, 0, 0, 1)},
-    {name = "SOON", cframe = nil},
+    -- [UPDATED]: Changed to Survivor Chomik (NEW)
+    {name = "Survivor Chomik (NEW)", cframe = CFrame.new(-228.820618, 378.57196, -767.333496, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "SOON", cframe = nil},
     {name = "SOON", cframe = nil},
     {name = "SOON", cframe = nil},
