@@ -297,7 +297,7 @@ end
 -- Список локаций TP
 local tpLocations = {
     -- [UPDATED]: Теперь тут 50 скачиваний вместо 25
-    {name = "Script updates will be released every 25 downloads", cframe = nil},
+    {name = "Script updates will be released every 50 downloads", cframe = nil},
     {name = "16-Bit Chomik + Noob Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "well Chomik", cframe = CFrame.new(-564.100769, 239.095383, 246.1203, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "chomatoes", cframe = CFrame.new(300.5, 242.974991, 493.499756, 1, 0, 0, 0, -1.1920929e-07, -1.00000012, 0, 1.00000012, -1.1920929e-07)},
