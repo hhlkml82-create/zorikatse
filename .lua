@@ -296,7 +296,6 @@ end
 
 -- Список локаций TP
 local tpLocations = {
-    -- [UPDATED]: Теперь тут 50 скачиваний вместо 25
     {name = "Script updates will be released every 50 downloads", cframe = nil},
     {name = "16-Bit Chomik + Noob Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "well Chomik", cframe = CFrame.new(-564.100769, 239.095383, 246.1203, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
@@ -315,6 +314,8 @@ local tpLocations = {
     {name = "Wannacry Chomik", cframe = CFrame.new(-237.044464, 280.525085, -242.393753, 0.866040111, -0.499974549, -5.5283308e-06, -5.5283308e-06, -2.06232071e-05, 0.99999994, -0.499974549, -0.866040051, -2.06232071e-05)},
     {name = "Cataclysmik", cframe = CFrame.new(415.433746, 216.02507, 206.014008, 0.130536318, -0.991443515, 3.59416008e-05, -3.59416008e-05, -4.10079956e-05, -1, 0.991443515, 0.130536318, -4.10079956e-05)},
     {name = "Desmos Chomik", cframe = CFrame.new(-371.944611, 238.461594, 137.605743, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
+    -- [NEW]: Добавлен Majin Chomik в конец списка TP
+    {name = "Majin Chomik (NEW)", cframe = CFrame.new(1324.75, 344.500061, -3192.5, 0, 0, 1, 0, 1, 0, -1, 0, 0)},
 }
 
 for _, location in ipairs(tpLocations) do
@@ -324,9 +325,7 @@ end
 -- Список локаций Backroom
 local backroomLocations = {
     {name = "Backrooms (teleport)", cframe = CFrame.new(-489.499908, 256.500061, -3356.53491, 1, 0, 0, 0, 1, 0, 0, 0, 1)},
-    -- [UPDATED]: Убрали (NEW) у Survivor Chomik
     {name = "Survivor Chomik", cframe = CFrame.new(-228.820618, 378.57196, -767.333496, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
-    -- [UPDATED]: Добавлен Backrooms Chomik(NEW) с новыми координатами
     {name = "Backrooms Chomik(NEW)", cframe = CFrame.new(-158.413574, 382.553467, -1005.33344, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "SOON", cframe = nil},
     {name = "SOON", cframe = nil},
