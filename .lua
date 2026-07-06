@@ -278,14 +278,16 @@ local function createTPButton(parent, name, cframe)
         
         btn.MouseButton1Click:Connect(function()
             local character = player.Character or player.CharacterAdded:Wait()
-            local hrp = character:WaitForChild("HumanoidRootPart")
-            hrp.CFrame = cframe
+            if character then
+                character:PivotTo(cframe)
+            end
         end)
         
         btn.TouchTap:Connect(function()
             local character = player.Character or player.CharacterAdded:Wait()
-            local hrp = character:WaitForChild("HumanoidRootPart")
-            hrp.CFrame = cframe
+            if character then
+                character:PivotTo(cframe)
+            end
         end)
     end
     
@@ -294,7 +296,7 @@ end
 
 -- Список локаций TP
 local tpLocations = {
-    -- Стоит самым первым в списке на самом верху
+    -- [UPDATED]: Теперь тут 50 скачиваний вместо 25
     {name = "Script updates will be released every 25 downloads", cframe = nil},
     {name = "16-Bit Chomik + Noob Chomik", cframe = CFrame.new(-17.9987755, 281.499969, 492.475891, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "well Chomik", cframe = CFrame.new(-564.100769, 239.095383, 246.1203, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
@@ -322,8 +324,10 @@ end
 -- Список локаций Backroom
 local backroomLocations = {
     {name = "Backrooms (teleport)", cframe = CFrame.new(-489.499908, 256.500061, -3356.53491, 1, 0, 0, 0, 1, 0, 0, 0, 1)},
-    {name = "Survivor Chomik (NEW)", cframe = CFrame.new(-228.820618, 378.57196, -767.333496, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
-    {name = "SOON", cframe = nil},
+    -- [UPDATED]: Убрали (NEW) у Survivor Chomik
+    {name = "Survivor Chomik", cframe = CFrame.new(-228.820618, 378.57196, -767.333496, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
+    -- [UPDATED]: Добавлен Backrooms Chomik(NEW) с новыми координатами
+    {name = "Backrooms Chomik(NEW)", cframe = CFrame.new(-158.413574, 382.553467, -1005.33344, -1, 0, 0, 0, 1, 0, 0, 0, -1)},
     {name = "SOON", cframe = nil},
     {name = "SOON", cframe = nil},
 }
